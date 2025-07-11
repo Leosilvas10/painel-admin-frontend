@@ -135,7 +135,7 @@ const Login = ({ onLogin }) => {
 
           <div className="text-center">
             <p className="text-xs text-gray-500">
-              Credenciais de teste: admin / admin123
+              Usuário: admin | Senha: admin123
             </p>
           </div>
         </form>
