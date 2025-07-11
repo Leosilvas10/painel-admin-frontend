@@ -7,6 +7,11 @@ const LandingPages = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState(null);
 
+  // Show error state if there's an error
+  if (error && !loading) {
+    console.error('Landing Pages Error:', error);
+  }
+
   // Mock data to merge with API data
   const mockPages = [
     {
@@ -78,6 +83,17 @@ const LandingPages = () => {
     setDeleteConfirm(page);
   };
 
+  // Show loading state
+  if (loading && landingPages.length === 0) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-white">Carregando landing pages...</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -104,21 +120,21 @@ const LandingPages = () => {
             className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 relative z-0"
           />
         </div>
-          <div className="flex items-center space-x-4">
-            <select className="bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2">
-              <option value="">Todos os Status</option>
-              <option value="published">Publicado</option>
-              <option value="draft">Rascunho</option>
-              <option value="archived">Arquivado</option>
-            </select>
-            <select className="bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2">
-              <option value="">Ordenar por</option>
-              <option value="date">Data</option>
-              <option value="views">Visualizações</option>
-              <option value="leads">Leads</option>
-            </select>
-          </div>
+        <div className="flex items-center space-x-4">
+          <select className="bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2">
+            <option value="">Todos os Status</option>
+            <option value="published">Publicado</option>
+            <option value="draft">Rascunho</option>
+            <option value="archived">Arquivado</option>
+          </select>
+          <select className="bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2">
+            <option value="">Ordenar por</option>
+            <option value="date">Data</option>
+            <option value="views">Visualizações</option>
+            <option value="leads">Leads</option>
+          </select>
         </div>
+      </div>
 
       {/* Pages Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

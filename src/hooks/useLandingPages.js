@@ -15,18 +15,29 @@ export const useLandingPages = () => {
       setLoading(false);
       return { success: true, data: result };
     } catch (err) {
-      setError(err.response?.data?.message || 'Erro na requisição');
+      console.error('API Error:', err);
+      const errorMessage = err.response?.data?.message || err.message || 'Erro na requisição';
+      setError(errorMessage);
       setLoading(false);
-      return { success: false, error: err };
+      return { success: false, error: errorMessage };
     }
   };
 
   const loadLandingPages = async () => {
-    const result = await executeApi(() => apiService.getLandingPages());
-    if (result.success) {
-      setLandingPages(result.data);
+    try {
+      const result = await executeApi(() => apiService.getLandingPages());
+      if (result.success && Array.isArray(result.data)) {
+        setLandingPages(result.data);
+      } else {
+        // Fallback para array vazio se a API falhar
+        setLandingPages([]);
+      }
+      return result;
+    } catch (err) {
+      console.error('Erro ao carregar landing pages:', err);
+      setLandingPages([]);
+      return { success: false, error: err.message };
     }
-    return result;
   };
 
   const createLandingPage = async (data) => {
