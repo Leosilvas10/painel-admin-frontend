@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { Plus, Search, Edit, Trash2, Eye, Globe, MoreVertical } from 'lucide-react';
+import { useLandingPages } from '../hooks/useLandingPages';
 
 const LandingPages = () => {
-  const [pages, setPages] = useState([
+  const { landingPages, loading, error, deleteLandingPage } = useLandingPages();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
+
+  // Mock data to merge with API data
+  const mockPages = [
     {
       id: 1,
       title: 'Produto Revolucionário',
@@ -43,14 +49,34 @@ const LandingPages = () => {
       lastModified: '2024-01-16',
       thumbnail: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
     }
-  ]);
+  ];
 
-  const [searchTerm, setSearchTerm] = useState('');
+  // Combine API data with mock data
+  const allPages = [...mockPages, ...landingPages];
 
-  const filteredPages = pages.filter(page =>
+  const filteredPages = allPages.filter(page =>
     page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     page.slug.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleDeletePage = async (pageId) => {
+    if (pageId === 'banco-jota') {
+      alert('Não é possível deletar a página do Banco Jota');
+      return;
+    }
+
+    const result = await deleteLandingPage(pageId);
+    if (result.success) {
+      alert('Landing page deletada com sucesso!');
+      setDeleteConfirm(null);
+    } else {
+      alert('Erro ao deletar landing page: ' + result.error);
+    }
+  };
+
+  const confirmDelete = (page) => {
+    setDeleteConfirm(page);
+  };
 
   return (
     <div className="space-y-6">
@@ -159,13 +185,17 @@ const LandingPages = () => {
                   )}
                 </div>
                 <div className="flex items-center space-x-2">
-                  <button className="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded-lg transition-colors duration-200">
+                  <button 
+                    onClick={() => confirmDelete(page)}
+                    className="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded-lg transition-colors duration-200"
+                    title="Deletar Landing Page"
+                  >
                     <Trash2 className="h-4 w-4" />
                   </button>
                   <button className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors duration-200">
                     <MoreVertical className="h-4 w-4" />
                   </button>
-                </div>
+                </div></div>
               </div>
             </div>
           </div>
@@ -222,6 +252,42 @@ const LandingPages = () => {
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-white mb-4">Confirmar Exclusão</h3>
+            <p className="text-gray-300 mb-6">
+              Tem certeza que deseja deletar a landing page "{deleteConfirm.title}"? 
+              Esta ação não pode ser desfeita.
+            </p>
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={() => setDeleteConfirm(null)}
+                className="px-4 py-2 text-gray-400 hover:text-white border border-gray-600 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={() => handleDeletePage(deleteConfirm.id)}
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200"
+              >
+                Deletar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Loading State */}
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-gray-800 rounded-lg p-6">
+            <div className="text-white">Carregando...</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

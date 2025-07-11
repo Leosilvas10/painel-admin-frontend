@@ -58,13 +58,13 @@ export const API_ENDPOINTS = {
   USERS_STATUS: (id) => `/api/users/${id}/status`,
 
   // LANDING PAGES
-  LANDING_PAGES_LIST: '/landing-pages',
-  LANDING_PAGES_CREATE: '/landing-pages',
-  LANDING_PAGES_GET: (id) => `/landing-pages/${id}`,
-  LANDING_PAGES_UPDATE: (id) => `/landing-pages/${id}`,
-  LANDING_PAGES_DELETE: (id) => `/landing-pages/${id}`,
-  LANDING_PAGES_PUBLISH: (id) => `/landing-pages/${id}/publish`,
-  LANDING_PAGES_DUPLICATE: (id) => `/landing-pages/${id}/duplicate`,
+  LANDING_PAGES_LIST: '/api/content/landing',
+  LANDING_PAGES_CREATE: '/api/content/landing',
+  LANDING_PAGES_GET: (id) => `/api/content/landing/${id}`,
+  LANDING_PAGES_UPDATE: (id) => `/api/content/landing/${id}`,
+  LANDING_PAGES_DELETE: (id) => `/api/content/landing/${id}`,
+  LANDING_PAGES_PUBLISH: (id) => `/api/content/landing/${id}/publish`,
+  LANDING_PAGES_DUPLICATE: (id) => `/api/content/landing/${id}/duplicate`,
 
   // BANCO JOTA CONTENT
   BANCO_JOTA_GET: '/api/content/landing/banco-jota',
