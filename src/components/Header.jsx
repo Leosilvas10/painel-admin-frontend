@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Search, MessageSquare, Bell, Menu } from 'lucide-react';
 
@@ -14,7 +13,7 @@ const Header = ({ setSidebarOpen }) => {
           >
             <Menu className="h-6 w-6" />
           </button>
-          
+
           <div className="flex items-center ml-4 md:ml-0">
             <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center mr-3">
               <img
@@ -47,7 +46,7 @@ const Header = ({ setSidebarOpen }) => {
           <button className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
             <MessageSquare className="h-5 w-5" />
           </button>
-          
+
           <button className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
             <Bell className="h-5 w-5" />
           </button>

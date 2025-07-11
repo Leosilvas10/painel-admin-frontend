@@ -9,10 +9,30 @@ import Media from './pages/Media';
 import Forms from './pages/Forms';
 import Users from './pages/Users';
 import Settings from './pages/Settings';
+import Login from './pages/Login';
+import { useAuth } from './hooks/useAuth';
 import './App.css';
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { isAuthenticated, isLoading, login } = useAuth();
+
+  // Mostrar loading enquanto verifica autenticação
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <p className="text-gray-400">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Mostrar tela de login se não estiver autenticado
+  if (!isAuthenticated) {
+    return <Login onLogin={login} />;
+  }
 
   return (
     <Router>
