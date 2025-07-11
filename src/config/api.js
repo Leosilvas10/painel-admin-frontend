@@ -47,7 +47,7 @@ export const API_ENDPOINTS = {
   FORMS_GET: (id) => `/api/forms/${id}`,
   FORMS_UPDATE: (id) => `/api/forms/${id}`,
   FORMS_DELETE: (id) => `/api/forms/${id}`,
-  FORMS_SUBMIT: (id) => `/api/forms/${id}/submit',
+  FORMS_SUBMIT: (id) => `/api/forms/${id}/submit`,
   FORMS_SUBMISSIONS: (id) => `/api/forms/${id}/submissions`,
   
   // Users
@@ -65,4 +65,5 @@ export const API_ENDPOINTS = {
   DASHBOARD_SYSTEM: '/api/dashboard/system',
 };
 
+export { API_BASE_URL };
 export default API_BASE_URL;
