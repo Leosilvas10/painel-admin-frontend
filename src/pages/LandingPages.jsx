@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Plus, Search, Edit, Trash2, Eye, Globe, MoreVertical } from 'lucide-react';
 
@@ -58,20 +57,17 @@ const LandingPages = () => {
       </div>
 
       {/* Search and Filters */}
-      <div className="bg-gray-800 rounded-lg p-6">
-        <div className="flex items-center justify-between mb-4">
-          <div className="relative flex-1 max-w-md">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-gray-400" />
-            </div>
-            <input
-              type="text"
-              placeholder="Buscar páginas..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between relative z-10">
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 pointer-events-none" />
+          <input
+            type="text"
+            placeholder="Buscar páginas..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 relative z-0"
+          />
+        </div>
           <div className="flex items-center space-x-4">
             <select className="bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2">
               <option value="">Todos os Status</option>
@@ -87,7 +83,6 @@ const LandingPages = () => {
             </select>
           </div>
         </div>
-      </div>
 
       {/* Pages Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -109,11 +104,11 @@ const LandingPages = () => {
                 </span>
               </div>
             </div>
-            
+
             <div className="p-6">
               <h3 className="text-lg font-semibold text-white mb-2">{page.title}</h3>
               <p className="text-gray-400 text-sm mb-4">/{page.slug}</p>
-              
+
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-white">{page.views}</div>
@@ -124,11 +119,11 @@ const LandingPages = () => {
                   <div className="text-xs text-gray-400">Leads</div>
                 </div>
               </div>
-              
+
               <div className="text-xs text-gray-400 mb-4">
                 Modificado em {new Date(page.lastModified).toLocaleDateString('pt-BR')}
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <button className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors duration-200">
@@ -170,7 +165,7 @@ const LandingPages = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="bg-gray-800 rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
@@ -182,7 +177,7 @@ const LandingPages = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="bg-gray-800 rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
@@ -194,7 +189,7 @@ const LandingPages = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="bg-gray-800 rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
