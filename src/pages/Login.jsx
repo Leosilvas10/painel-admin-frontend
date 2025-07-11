@@ -1,5 +1,57 @@
-import React, { useState } from 'react';
-import { Lock, User, Eye, EyeOff } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Lock, User, Eye, EyeOff, Wifi, WifiOff, AlertTriangle } from 'lucide-react';
+
+// Componente para mostrar status do backend
+const BackendStatus = () => {
+  const [status, setStatus] = useState('checking');
+
+  useEffect(() => {
+    const checkStatus = () => {
+      const backendStatus = localStorage.getItem('backendStatus') || 'checking';
+      setStatus(backendStatus);
+    };
+
+    checkStatus();
+    const interval = setInterval(checkStatus, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const getStatusConfig = () => {
+    switch (status) {
+      case 'online':
+        return {
+          icon: Wifi,
+          text: 'Backend Online',
+          className: 'bg-green-900 text-green-200 border-green-700',
+          iconColor: 'text-green-400'
+        };
+      case 'offline':
+        return {
+          icon: WifiOff,
+          text: 'Backend Offline (Modo Demo)',
+          className: 'bg-red-900 text-red-200 border-red-700',
+          iconColor: 'text-red-400'
+        };
+      default:
+        return {
+          icon: AlertTriangle,
+          text: 'Verificando Backend...',
+          className: 'bg-yellow-900 text-yellow-200 border-yellow-700',
+          iconColor: 'text-yellow-400'
+        };
+    }
+  };
+
+  const config = getStatusConfig();
+  const Icon = config.icon;
+
+  return (
+    <div className={`inline-flex items-center px-3 py-1 rounded-lg text-xs border ${config.className}`}>
+      <Icon className={`w-3 h-3 mr-2 ${config.iconColor}`} />
+      {config.text}
+    </div>
+  );
+};
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -50,6 +102,11 @@ const Login = ({ onLogin }) => {
           <p className="mt-2 text-center text-sm text-gray-400">
             Faça login para acessar o <span className="text-purple-400 font-semibold">JotaGuard</span>
           </p>
+          
+          {/* Status do Backend */}
+          <div className="mt-4 flex justify-center">
+            <BackendStatus />
+          </div>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -163,9 +220,14 @@ const Login = ({ onLogin }) => {
             >
               Testar Conectividade Completa
             </button>
-            <p className="text-xs text-gray-500">
-              Usuário: admin | Senha: admin123
-            </p>
+            <div className="space-y-1">
+              <p className="text-xs text-gray-500">
+                <span className="text-purple-400">Demonstração:</span> admin | admin123
+              </p>
+              <p className="text-xs text-gray-600">
+                (Funciona mesmo com backend offline)
+              </p>
+            </div>
           </div>
         </form>
       </div>

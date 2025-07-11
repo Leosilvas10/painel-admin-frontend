@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import apiService from '../services/api';
 
@@ -11,7 +10,7 @@ export const useAuth = () => {
     // Verificar se o usuário está autenticado ao carregar a aplicação
     const checkAuth = async () => {
       const token = localStorage.getItem('authToken');
-      
+
       if (token) {
         try {
           const userData = await apiService.getMe();
@@ -35,23 +34,81 @@ export const useAuth = () => {
   }, []);
 
   const login = async (credentials) => {
+    setIsLoading(true);
+    
+
     try {
+      // Verificar se é credencial de demonstração
+      if (credentials.username === 'admin' && credentials.password === 'admin123') {
+        console.log('🎯 Usando credenciais de demonstração - modo offline');
+
+        const demoUser = {
+          id: 1,
+          username: 'admin',
+          name: 'Administrador Demo',
+          email: 'admin@demo.com',
+          role: 'admin'
+        };
+
+        localStorage.setItem('authToken', 'demo-token-123');
+        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('user', JSON.stringify(demoUser));
+        localStorage.setItem('isDemo', 'true');
+
+        setIsAuthenticated(true);
+        setUser(demoUser);
+
+        return { success: true, message: 'Login realizado com sucesso (modo demonstração)' };
+      }
+
+      // Tentar autenticação real com o backend
       const response = await apiService.login(credentials);
-      const { token, user: userData } = response;
-      
-      localStorage.setItem('authToken', token);
-      localStorage.setItem('user', JSON.stringify(userData));
-      localStorage.setItem('isAuthenticated', 'true');
-      
-      setIsAuthenticated(true);
-      setUser(userData);
-      
-      return { success: true };
+
+      if (response.success) {
+        localStorage.setItem('authToken', response.token);
+        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('user', JSON.stringify(response.user));
+        localStorage.removeItem('isDemo');
+
+        setIsAuthenticated(true);
+        setUser(response.user);
+
+        return { success: true };
+      } else {
+        return { success: false, message: response.message };
+      }
     } catch (error) {
+      console.error('Login error:', error);
+
+      // Se for as credenciais de demo e o backend falhou, usar modo demo
+      if (credentials.username === 'admin' && credentials.password === 'admin123') {
+        console.log('🎯 Backend indisponível, usando modo demonstração');
+
+        const demoUser = {
+          id: 1,
+          username: 'admin',
+          name: 'Administrador Demo',
+          email: 'admin@demo.com',
+          role: 'admin'
+        };
+
+        localStorage.setItem('authToken', 'demo-token-123');
+        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('user', JSON.stringify(demoUser));
+        localStorage.setItem('isDemo', 'true');
+
+        setIsAuthenticated(true);
+        setUser(demoUser);
+
+        return { success: true, message: 'Login realizado (modo demonstração - backend offline)' };
+      }
+
       return { 
         success: false, 
-        message: error.response?.data?.message || 'Erro ao fazer login'
+        message: 'Erro de conexão. Verifique se o backend está rodando.' 
       };
+    } finally {
+      setIsLoading(false);
     }
   };
 

@@ -8,18 +8,48 @@ console.log('API Base URL:', API_BASE_URL);
 // Função para testar conectividade
 const testConnection = async () => {
   try {
-    const response = await fetch(API_BASE_URL, { 
-      method: 'HEAD',
-      mode: 'no-cors' 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
+    const response = await fetch(API_BASE_URL + '/api/health', { 
+      method: 'GET',
+      signal: controller.signal,
+      headers: {
+        'Accept': 'application/json',
+      }
     });
-    console.log('Backend connection test:', response.type === 'opaque' ? 'Connected' : 'Failed');
+    
+    clearTimeout(timeoutId);
+    
+    if (response.ok) {
+      console.log('✅ Backend connection test: Connected');
+      localStorage.setItem('backendStatus', 'online');
+    } else {
+      console.log('⚠️ Backend connection test: Server responded but not healthy');
+      localStorage.setItem('backendStatus', 'unhealthy');
+    }
   } catch (error) {
-    console.error('Backend connection test failed:', error);
+    console.error('❌ Backend connection test failed:', error.message);
+    localStorage.setItem('backendStatus', 'offline');
+    
+    // Tentar teste básico sem CORS
+    try {
+      const basicResponse = await fetch(API_BASE_URL, { 
+        method: 'HEAD',
+        mode: 'no-cors' 
+      });
+      console.log('📡 Basic connectivity test:', response.type === 'opaque' ? 'Server reachable' : 'Server unreachable');
+    } catch (basicError) {
+      console.error('📡 Basic connectivity failed:', basicError.message);
+    }
   }
 };
 
 // Testar conexão ao inicializar
 testConnection();
+
+// Re-testar a cada 30 segundos
+setInterval(testConnection, 30000);
 
 // Criar instância do axios
 const httpService = axios.create({
