@@ -1,0 +1,105 @@
+Desenvolva um painel administrativo (admin) completo para gerenciamento de landing pages. O sistema será utilizado por um usuário administrador (ou equipe) para criar, editar, excluir e gerenciar o conteúdo das landing pages comerciais da empresa Jota Soluções. O painel deve ser responsivo, seguro e de fácil utilização.
+
+Stack obrigatória:
+
+Next.js
+
+React
+
+TailwindCSS
+
+Backend: Node.js/Express ou Next.js API routes
+
+Banco de dados: pode sugerir entre MongoDB, PostgreSQL ou outro padrão do mercado
+
+Upload de arquivos: via AWS S3, Cloudinary, ou solução de arquivos local
+
+Painel com autenticação segura (login/logout, recuperação de senha)
+
+Funcionalidades obrigatórias:
+1. Gerenciamento de Landing Pages (CRUD)
+Listar todas as landing pages cadastradas
+
+Criar nova landing page
+
+Editar landing page existente
+
+Excluir landing page
+
+Ativar/desativar página
+
+Campo para URL personalizada (slug)
+
+Definir meta title, meta description e keywords (SEO básico)
+
+2. Editor Visual de Conteúdo
+Editor de texto rico (rich text), tipo WYSIWYG para blocos de texto, títulos, listas, formatação, links, etc.
+
+Upload de imagens (com visualização e edição)
+
+Upload de vídeos (inserir vídeo via upload ou link embed YouTube/Vimeo)
+
+Seção para depoimentos/provas sociais (CRUD de depoimentos)
+
+Gerenciamento de seções: ordenar, adicionar, remover blocos (ex: Hero, Benefícios, Prova Social, Formulário)
+
+Pré-visualização em tempo real da landing page
+
+3. Gestão de Formulários
+Criar/editar campos do formulário de captura (nome, e-mail, telefone, campos personalizados)
+
+Visualizar, exportar ou baixar leads capturados
+
+Integração simples com CRM ou exportação para CSV
+
+4. Biblioteca de Mídias
+Área para upload, listagem, organização e remoção de arquivos de imagem e vídeo (pasta por cliente/projeto)
+
+Otimização automática das imagens para web
+
+5. Gestão de Usuários/Admins
+Permitir múltiplos usuários admins
+
+Controle de permissões (acesso total, somente leitura, etc)
+
+Alterar senha, redefinir senha via e-mail
+
+6. Relatórios
+Painel de estatísticas: número de leads, páginas ativas, últimas modificações
+
+Registro de atividades (log de alterações)
+
+7. Configurações Gerais
+Alterar informações institucionais (nome da empresa, logo, favicon)
+
+Configurar integrações externas (pixel, Google Analytics, WhatsApp, CRM)
+
+8. Responsividade e UX
+Painel responsivo (funciona em mobile/tablet/desktop)
+
+Interface limpa, intuitiva e moderna (usar TailwindCSS e componentes com UX de painel profissional)
+
+Extras/Opcionais:
+Permitir duplicar páginas para criar variações (A/B test)
+
+Opção para salvar como rascunho/publicar
+
+Histórico de versões (rollback)
+
+Preview em tempo real no mobile e desktop
+
+Tutoriais rápidos de uso no painel (onboarding)
+
+Observações importantes:
+O painel não precisa ser multiempresa (mas se puder deixar estruturado para crescer, melhor).
+
+Deve ser seguro (autenticação JWT, proteção contra ataques comuns).
+
+Use React + Next.js + TailwindCSS.
+
+Documente as rotas da API, modelos de banco de dados e principais componentes no código.
+
+Entregue um projeto escalável, limpo e organizado.
+
+Gere o código inicial do painel admin, incluindo estrutura de pastas, models do banco, rotas de autenticação, rotas CRUD de páginas, upload de arquivos, editor visual e listagem básica de conteúdo.
+Implemente exemplos de CRUD de páginas, depoimentos, uploads, e um formulário de login seguro.
