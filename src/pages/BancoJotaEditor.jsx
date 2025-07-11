@@ -20,7 +20,9 @@ const BancoJotaEditor = () => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (bancoJotaData.data) {
+    console.log('bancoJotaData mudou:', bancoJotaData);
+    if (bancoJotaData && bancoJotaData.data) {
+      console.log('Atualizando formData com:', bancoJotaData.data);
       setFormData(bancoJotaData.data);
     }
   }, [bancoJotaData]);
@@ -53,7 +55,7 @@ const BancoJotaEditor = () => {
     await loadBancoJotaContent();
   };
 
-  if (loading && !formData.title) {
+  if (loading && (!formData || !formData.title)) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-white">Carregando dados do Banco Jota...</div>

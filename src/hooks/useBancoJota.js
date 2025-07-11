@@ -32,7 +32,8 @@ export const useBancoJota = () => {
 
   const loadBancoJotaContent = async () => {
     const result = await executeApi(() => apiService.getBancoJotaContent());
-    if (result.success) {
+    if (result.success && result.data) {
+      console.log('Dados recebidos da API:', result.data);
       setBancoJotaData(result.data);
     }
     return result;
@@ -40,8 +41,9 @@ export const useBancoJota = () => {
 
   const updateBancoJotaContent = async (data) => {
     const result = await executeApi(() => apiService.updateBancoJotaContent(data));
-    if (result.success) {
-      setBancoJotaData({ ...bancoJotaData, ...result.data });
+    if (result.success && result.data) {
+      console.log('Dados atualizados:', result.data);
+      setBancoJotaData(result.data);
     }
     return result;
   };
