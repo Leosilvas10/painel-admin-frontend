@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
@@ -39,11 +38,11 @@ export default function App() {
       <div className="flex h-screen bg-gray-900">
         {/* Sidebar */}
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        
+
         {/* Main content */}
         <div className="flex-1 flex flex-col overflow-hidden md:ml-64">
           <Header setSidebarOpen={setSidebarOpen} />
-          
+
           <main className="flex-1 overflow-y-auto bg-gray-900 p-6">
             <Routes>
               <Route path="/" element={<Dashboard />} />

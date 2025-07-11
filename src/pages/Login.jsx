@@ -137,18 +137,31 @@ const Login = ({ onLogin }) => {
             <button
               type="button"
               onClick={async () => {
+                console.log('Testando conectividade...');
                 try {
-                  const response = await fetch('https://painel-admin-backend-leonardosilva2.replit.app');
-                  console.log('Backend test response:', response.status);
-                  alert(`Backend respondeu com status: ${response.status}`);
+                  // Teste 1: Conexão básica
+                  const response1 = await fetch('https://painel-admin-backend-leonardosilva2.replit.app');
+                  console.log('✅ Teste 1 - Conexão básica:', response1.status);
+                  
+                  // Teste 2: Health check
+                  const response2 = await fetch('https://painel-admin-backend-leonardosilva2.replit.app/api/health');
+                  console.log('✅ Teste 2 - Health check:', response2.status);
+                  
+                  // Teste 3: CORS preflight
+                  const response3 = await fetch('https://painel-admin-backend-leonardosilva2.replit.app/api/auth/login', {
+                    method: 'OPTIONS',
+                  });
+                  console.log('✅ Teste 3 - CORS preflight:', response3.status);
+                  
+                  alert('✅ Todos os testes passaram! Backend está funcionando.');
                 } catch (error) {
-                  console.error('Backend test error:', error);
-                  alert('Erro ao conectar com o backend: ' + error.message);
+                  console.error('❌ Erro nos testes:', error);
+                  alert('❌ Erro: ' + error.message);
                 }
               }}
               className="text-xs text-blue-400 hover:text-blue-300 underline"
             >
-              Testar Conexão com Backend
+              Testar Conectividade Completa
             </button>
             <p className="text-xs text-gray-500">
               Usuário: admin | Senha: admin123

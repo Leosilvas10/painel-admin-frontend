@@ -27,7 +27,9 @@ const httpService = axios.create({
   timeout: 30000, // Aumentado para 30s
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
   },
+  withCredentials: false, // Importante para CORS
 });
 
 // Interceptor para adicionar token automaticamente
