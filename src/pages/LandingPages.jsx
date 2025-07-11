@@ -56,20 +56,22 @@ const LandingPages = () => {
     }
   ];
 
-  // Combine API data with mock data
-  const allPages = [...mockPages, ...landingPages];
+  // Combine API data with mock data, filtering out deleted pages
+  const allPages = [...mockPages, ...landingPages].filter(page => !deletedPages.has(page.id));
 
   const filteredPages = allPages.filter(page =>
     page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     page.slug.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const [deletedPages, setDeletedPages] = useState(new Set());
+
   const handleDeletePage = async (page) => {
     try {
-      // Para páginas do backend, usar o slug; para páginas mock, simular deleção
+      // Para páginas mock, simular deleção removendo da lista
       if (['1', '2', '3', 1, 2, 3].includes(page.id)) {
-        // Simular deleção das páginas de demonstração
-        alert('Página de demonstração deletada (simulação)!');
+        setDeletedPages(prev => new Set([...prev, page.id]));
+        alert('Página de demonstração deletada com sucesso!');
         setDeleteConfirm(null);
         return;
       }
