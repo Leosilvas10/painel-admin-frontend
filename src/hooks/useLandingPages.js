@@ -59,11 +59,19 @@ export const useLandingPages = () => {
   };
 
   const deleteLandingPage = async (id) => {
-    const result = await executeApi(() => apiService.deleteLandingPage(id));
-    if (result.success) {
-      setLandingPages(landingPages.filter(page => page.id !== id));
+    try {
+      const result = await executeApi(() => apiService.deleteLandingPage(id));
+      if (result.success) {
+        setLandingPages(landingPages.filter(page => page.id !== id));
+        return { success: true, message: 'Landing page deletada com sucesso!' };
+      } else {
+        console.error('Erro ao deletar landing page:', result.error);
+        return { success: false, error: result.error };
+      }
+    } catch (err) {
+      console.error('Erro inesperado ao deletar:', err);
+      return { success: false, error: 'Erro inesperado ao deletar landing page' };
     }
-    return result;
   };
 
   const getLandingPage = async (id) => {

@@ -67,16 +67,30 @@ const LandingPages = () => {
   const handleDeletePage = async (pageId) => {
     if (pageId === 'banco-jota') {
       alert('Não é possível deletar a página do Banco Jota');
+      setDeleteConfirm(null);
       return;
     }
 
-    const result = await deleteLandingPage(pageId);
-    if (result.success) {
-      alert('Landing page deletada com sucesso!');
+    // Verificar se é um ID de mock (números 1, 2, 3)
+    if (['1', '2', '3', 1, 2, 3].includes(pageId)) {
+      alert('Esta é uma página de demonstração e não pode ser deletada');
       setDeleteConfirm(null);
-    } else {
-      alert('Erro ao deletar landing page: ' + result.error);
+      return;
     }
+
+    try {
+      const result = await deleteLandingPage(pageId);
+      if (result.success) {
+        alert(result.message || 'Landing page deletada com sucesso!');
+      } else {
+        alert('Erro ao deletar landing page: ' + (result.error || 'Erro desconhecido'));
+      }
+    } catch (err) {
+      console.error('Erro ao deletar:', err);
+      alert('Erro inesperado ao deletar landing page');
+    }
+    
+    setDeleteConfirm(null);
   };
 
   const confirmDelete = (page) => {
