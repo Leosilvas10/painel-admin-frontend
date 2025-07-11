@@ -1,11 +1,11 @@
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://painel-admin-backend-leonardosilva2.replit.app';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export const API_ENDPOINTS = {
   // Auth
   LOGIN: '/api/auth/login',
   LOGOUT: '/api/auth/logout',
-  ME: '/api/auth/me',
+  ME: '/api/auth/verify',
   
   // Logo
   LOGO_UPLOAD: '/api/logo/upload',

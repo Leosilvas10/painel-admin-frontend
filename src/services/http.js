@@ -38,7 +38,7 @@ const testConnection = async () => {
         method: 'HEAD',
         mode: 'no-cors' 
       });
-      console.log('📡 Basic connectivity test:', response.type === 'opaque' ? 'Server reachable' : 'Server unreachable');
+      console.log('📡 Basic connectivity test:', basicResponse.type === 'opaque' ? 'Server reachable' : 'Server unreachable');
     } catch (basicError) {
       console.error('📡 Basic connectivity failed:', basicError.message);
     }
