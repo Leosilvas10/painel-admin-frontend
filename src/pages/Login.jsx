@@ -133,7 +133,23 @@ const Login = ({ onLogin }) => {
             </button>
           </div>
 
-          <div className="text-center">
+          <div className="text-center space-y-2">
+            <button
+              type="button"
+              onClick={async () => {
+                try {
+                  const response = await fetch('https://painel-admin-backend-leonardosilva2.replit.app');
+                  console.log('Backend test response:', response.status);
+                  alert(`Backend respondeu com status: ${response.status}`);
+                } catch (error) {
+                  console.error('Backend test error:', error);
+                  alert('Erro ao conectar com o backend: ' + error.message);
+                }
+              }}
+              className="text-xs text-blue-400 hover:text-blue-300 underline"
+            >
+              Testar Conexão com Backend
+            </button>
             <p className="text-xs text-gray-500">
               Usuário: admin | Senha: admin123
             </p>
