@@ -66,6 +66,10 @@ export const API_ENDPOINTS = {
   LANDING_PAGES_PUBLISH: (id) => `/landing-pages/${id}/publish`,
   LANDING_PAGES_DUPLICATE: (id) => `/landing-pages/${id}/duplicate`,
 
+  // BANCO JOTA CONTENT
+  BANCO_JOTA_GET: '/api/content/landing/banco-jota',
+  BANCO_JOTA_UPDATE: '/api/content/landing/banco-jota',
+
   // Dashboard
   DASHBOARD_STATS: '/api/dashboard/stats',
   DASHBOARD_ACTIVITIES: '/api/dashboard/activities',

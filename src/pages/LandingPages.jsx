@@ -32,6 +32,16 @@ const LandingPages = () => {
       leads: 78,
       lastModified: '2024-01-13',
       thumbnail: 'https://images.unsplash.com/photo-1553028826-f4804a6dba3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+    },
+    {
+      id: 'banco-jota',
+      title: 'Banco Jota',
+      slug: 'banco-jota',
+      status: 'published',
+      views: 890,
+      leads: 25,
+      lastModified: '2024-01-16',
+      thumbnail: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
     }
   ]);
 
@@ -130,7 +140,13 @@ const LandingPages = () => {
                     <Eye className="h-4 w-4" />
                   </button>
                   <button 
-                    onClick={() => window.open(`/editor/${page.id}`, '_blank')}
+                    onClick={() => {
+                      if (page.id === 'banco-jota') {
+                        window.open('/banco-jota-editor', '_blank');
+                      } else {
+                        window.open(`/editor/${page.id}`, '_blank');
+                      }
+                    }}
                     className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors duration-200"
                     title="Editar Landing Page"
                   >

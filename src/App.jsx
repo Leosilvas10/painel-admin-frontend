@@ -4,6 +4,8 @@ import { useAuth } from './hooks/useAuth';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import LandingPages from './pages/LandingPages';
+import LandingPageEditor from './pages/LandingPageEditor';
+import BancoJotaEditor from './pages/BancoJotaEditor';
 import Media from './pages/Media';
 import Forms from './pages/Forms';
 import Users from './pages/Users';
@@ -11,7 +13,7 @@ import Settings from './pages/Settings';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import './App.css';
-import LandingPageEditor from './pages/LandingPageEditor';
+
 
 // Debug: Teste de conectividade básica
 const testBackendConnection = async () => {
@@ -80,6 +82,7 @@ export default function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/landing-pages" element={<LandingPages />} />
               <Route path="/editor/:id" element={<LandingPageEditor />} />
+               <Route path="/banco-jota-editor" element={<BancoJotaEditor />} />
               <Route path="/media" element={<Media />} />
               <Route path="/forms" element={<Forms />} />
               <Route path="/users" element={<Users />} />

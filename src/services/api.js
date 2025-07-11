@@ -255,6 +255,17 @@ class ApiService {
     return response.data;
   }
 
+  // BANCO JOTA CONTENT
+  async getBancoJotaContent() {
+    const response = await httpService.get(API_ENDPOINTS.BANCO_JOTA_GET);
+    return response.data;
+  }
+
+  async updateBancoJotaContent(data) {
+    const response = await httpService.put(API_ENDPOINTS.BANCO_JOTA_UPDATE, data);
+    return response.data;
+  }
+
   // DASHBOARD
   async getDashboardStats() {
     const response = await httpService.get(API_ENDPOINTS.DASHBOARD_STATS);
