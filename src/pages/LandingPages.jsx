@@ -129,7 +129,11 @@ const LandingPages = () => {
                   <button className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors duration-200">
                     <Eye className="h-4 w-4" />
                   </button>
-                  <button className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors duration-200">
+                  <button 
+                    onClick={() => window.open(`/editor/${page.id}`, '_blank')}
+                    className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors duration-200"
+                    title="Editar Landing Page"
+                  >
                     <Edit className="h-4 w-4" />
                   </button>
                   {page.status === 'published' && (

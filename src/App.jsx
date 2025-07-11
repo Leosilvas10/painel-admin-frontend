@@ -11,6 +11,7 @@ import Settings from './pages/Settings';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import './App.css';
+import LandingPageEditor from './pages/LandingPageEditor';
 
 // Debug: Teste de conectividade básica
 const testBackendConnection = async () => {
@@ -76,7 +77,9 @@ export default function App() {
           <main className="flex-1 overflow-y-auto bg-gray-900 p-6">
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/landing-pages" element={<LandingPages />} />
+              <Route path="/editor/:id" element={<LandingPageEditor />} />
               <Route path="/media" element={<Media />} />
               <Route path="/forms" element={<Forms />} />
               <Route path="/users" element={<Users />} />

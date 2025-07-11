@@ -1,4 +1,3 @@
-
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export const API_ENDPOINTS = {
@@ -6,23 +5,23 @@ export const API_ENDPOINTS = {
   LOGIN: '/api/auth/login',
   LOGOUT: '/api/auth/logout',
   ME: '/api/auth/verify',
-  
+
   // Logo
   LOGO_UPLOAD: '/api/logo/upload',
   LOGO_GET: '/api/logo',
   LOGO_DELETE: '/api/logo',
-  
+
   // Videos
   VIDEOS_UPLOAD: '/api/videos/upload',
   VIDEOS_LIST: '/api/videos',
   VIDEOS_GET: (id) => `/api/videos/${id}`,
   VIDEOS_UPDATE: (id) => `/api/videos/${id}`,
   VIDEOS_DELETE: (id) => `/api/videos/${id}`,
-  
+
   // Content
   CONTENT_SECTIONS: '/api/content/sections',
   CONTENT_SECTION: (section) => `/api/content/sections/${section}`,
-  
+
   // Blocks
   BLOCKS_LIST: '/api/blocks',
   BLOCKS_CREATE: '/api/blocks',
@@ -30,17 +29,17 @@ export const API_ENDPOINTS = {
   BLOCKS_UPDATE: (id) => `/api/blocks/${id}`,
   BLOCKS_DELETE: (id) => `/api/blocks/${id}`,
   BLOCKS_REORDER: '/api/blocks/reorder',
-  
+
   // Settings
   SETTINGS_GET: '/api/settings',
   SETTINGS_UPDATE: '/api/settings',
   SETTINGS_SEO: '/api/settings/seo',
-  
+
   // Images
   IMAGES_UPLOAD: '/api/images/upload',
   IMAGES_LIST: '/api/images',
   IMAGES_DELETE: (id) => `/api/images/${id}`,
-  
+
   // Forms
   FORMS_LIST: '/api/forms',
   FORMS_CREATE: '/api/forms',
@@ -49,7 +48,7 @@ export const API_ENDPOINTS = {
   FORMS_DELETE: (id) => `/api/forms/${id}`,
   FORMS_SUBMIT: (id) => `/api/forms/${id}/submit`,
   FORMS_SUBMISSIONS: (id) => `/api/forms/${id}/submissions`,
-  
+
   // Users
   USERS_LIST: '/api/users',
   USERS_CREATE: '/api/users',
@@ -57,7 +56,16 @@ export const API_ENDPOINTS = {
   USERS_UPDATE: (id) => `/api/users/${id}`,
   USERS_DELETE: (id) => `/api/users/${id}`,
   USERS_STATUS: (id) => `/api/users/${id}/status`,
-  
+
+  // LANDING PAGES
+  LANDING_PAGES_LIST: '/landing-pages',
+  LANDING_PAGES_CREATE: '/landing-pages',
+  LANDING_PAGES_GET: (id) => `/landing-pages/${id}`,
+  LANDING_PAGES_UPDATE: (id) => `/landing-pages/${id}`,
+  LANDING_PAGES_DELETE: (id) => `/landing-pages/${id}`,
+  LANDING_PAGES_PUBLISH: (id) => `/landing-pages/${id}/publish`,
+  LANDING_PAGES_DUPLICATE: (id) => `/landing-pages/${id}/duplicate`,
+
   // Dashboard
   DASHBOARD_STATS: '/api/dashboard/stats',
   DASHBOARD_ACTIVITIES: '/api/dashboard/activities',

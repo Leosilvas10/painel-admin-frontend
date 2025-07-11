@@ -219,6 +219,42 @@ class ApiService {
     return response.data;
   }
 
+  // LANDING PAGES
+  async getLandingPages() {
+    const response = await httpService.get(API_ENDPOINTS.LANDING_PAGES_LIST);
+    return response.data;
+  }
+
+  async createLandingPage(data) {
+    const response = await httpService.post(API_ENDPOINTS.LANDING_PAGES_CREATE, data);
+    return response.data;
+  }
+
+  async getLandingPage(id) {
+    const response = await httpService.get(API_ENDPOINTS.LANDING_PAGES_GET(id));
+    return response.data;
+  }
+
+  async updateLandingPage(id, data) {
+    const response = await httpService.put(API_ENDPOINTS.LANDING_PAGES_UPDATE(id), data);
+    return response.data;
+  }
+
+  async deleteLandingPage(id) {
+    const response = await httpService.delete(API_ENDPOINTS.LANDING_PAGES_DELETE(id));
+    return response.data;
+  }
+
+  async publishLandingPage(id) {
+    const response = await httpService.post(API_ENDPOINTS.LANDING_PAGES_PUBLISH(id));
+    return response.data;
+  }
+
+  async duplicateLandingPage(id) {
+    const response = await httpService.post(API_ENDPOINTS.LANDING_PAGES_DUPLICATE(id));
+    return response.data;
+  }
+
   // DASHBOARD
   async getDashboardStats() {
     const response = await httpService.get(API_ENDPOINTS.DASHBOARD_STATS);
