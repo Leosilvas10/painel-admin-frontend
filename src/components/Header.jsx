@@ -47,7 +47,6 @@ const Header = ({ setSidebarOpen }) => {
 
           {/* Notifications */}
           <button className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
-            <MessageSquare className="h-5 w-5" />
           </button>
 
           <button className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">

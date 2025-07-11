@@ -18,31 +18,11 @@ export default function App() {
 
   // Mostrar loading enquanto verifica autenticação
   if (isLoading) {
-    const backendStatus = localStorage.getItem('backendStatus') || 'checking';
-    
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
           <p className="text-gray-400">Carregando...</p>
-          <div className="mt-4">
-            <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs ${
-              backendStatus === 'online' ? 'bg-green-900 text-green-200' :
-              backendStatus === 'offline' ? 'bg-red-900 text-red-200' :
-              'bg-yellow-900 text-yellow-200'
-            }`}>
-              <div className={`w-2 h-2 rounded-full mr-2 ${
-                backendStatus === 'online' ? 'bg-green-400' :
-                backendStatus === 'offline' ? 'bg-red-400' :
-                'bg-yellow-400'
-              }`}></div>
-              Backend: {
-                backendStatus === 'online' ? 'Online' :
-                backendStatus === 'offline' ? 'Offline' :
-                'Verificando...'
-              }
-            </div>
-          </div>
         </div>
       </div>
     );
