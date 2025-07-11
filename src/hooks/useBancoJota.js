@@ -6,89 +6,222 @@ export const useBancoJota = () => {
   const [bancoJotaData, setBancoJotaData] = useState({
     slug: 'banco-jota',
     data: {
+      header: {
+        logo: '/logo.png',
+        navegacao: [
+          { texto: 'Início', link: '#inicio' },
+          { texto: 'Sobre', link: '#sobre' },
+          { texto: 'Benefícios', link: '#beneficios' },
+          { texto: 'Como Funciona', link: '#como-funciona' },
+          { texto: 'Simular', link: '#simular' }
+        ]
+      },
       inicio: {
         titulo: 'Realize o Sonho da Casa Própria Sem Juros',
         subtitulo: 'Consórcio imobiliário com atendimento consultivo e humanizado. Parcelas fixas, sem juros e com condições especiais.',
         botaoPrimario: 'Simular Agora',
-        botaoSecundario: 'Saiba Mais'
+        botaoSecundario: 'Saiba Mais',
+        videoExplicativo: {
+          titulo: 'Vídeo Explicativo',
+          subtitulo: 'Clique para fazer upload do vídeo',
+          botao: 'Escolher Vídeo',
+          formatos: 'Formatos: MP4, AVI, MOV',
+          arquivo: null
+        },
+        cardCasaPropria: {
+          titulo: 'Casa Própria',
+          subtitulo: 'Sem juros, sem entrada obrigatória',
+          parcela: 'R$ 380',
+          texto: 'Parcelas a partir de',
+          periodo: 'mensais'
+        }
       },
-      sobre: {
-        titulo: 'Banco Jota: Especialistas em Consórcio Imobiliário',
-        descricao: 'Somos especialistas em consórcio imobiliário com anos de experiência no mercado. Oferecemos soluções personalizadas para realizar o sonho da casa própria.',
-        beneficios: [
-          'Sem juros, apenas taxa de administração',
-          'Parcelas fixas durante todo o período',
-          'Flexibilidade de pagamento',
-          'Atendimento humanizado e consultivo'
-        ]
-      },
-      beneficios: {
-        titulo: 'Por que escolher o Banco Jota?',
+      vantagens: {
+        titulo: 'Vantagens do Consórcio Imobiliário',
+        subtitulo: 'Conheça todos os benefícios que fazem do consórcio a melhor opção para conquistar seu imóvel',
         lista: [
           {
             icone: '🏠',
-            titulo: 'Casa Própria',
-            descricao: 'Sem juros, sem entrada obrigatória'
+            titulo: 'Sem Juros',
+            descricao: 'Parcelas fixas sem juros, apenas taxa de administração'
           },
           {
             icone: '💰',
-            titulo: 'Parcelas Fixas',
-            descricao: 'A partir de R$ 380/mês'
+            titulo: 'Sem Entrada',
+            descricao: 'Não é obrigatório dar entrada para participar'
           },
           {
-            icone: '⚡',
-            titulo: 'Processo Rápido',
-            descricao: 'Aprovação em até 48h'
+            icone: '📊',
+            titulo: 'Parcelas Fixas',
+            descricao: 'Valor das parcelas não sofre alteração durante o período'
+          },
+          {
+            icone: '⭐',
+            titulo: 'Flexibilidade',
+            descricao: 'Escolha o imóvel quando for contemplado'
+          },
+          {
+            icone: '🎯',
+            titulo: 'Objetivo Claro',
+            descricao: 'Você sabe exatamente quando terá seu imóvel'
           },
           {
             icone: '🛡️',
             titulo: 'Segurança',
             descricao: 'Regulamentado pelo Banco Central'
+          },
+          {
+            icone: '📍',
+            titulo: 'Planejamento',
+            descricao: 'Organize suas finanças com tranquilidade'
+          },
+          {
+            icone: '💛',
+            titulo: 'Suporte',
+            descricao: 'Acompanhamento completo do nosso time'
           }
         ]
       },
       comoFunciona: {
         titulo: 'Como Funciona o Consórcio',
+        subtitulo: 'Processo simples e transparente para você conquistar sua casa própria',
         passos: [
           {
             numero: '1',
-            titulo: 'Escolha seu Plano',
-            descricao: 'Selecione o valor da carta de crédito ideal para você'
+            titulo: 'Simulação',
+            descricao: 'Faça uma simulação gratuita e descubra o valor da parcela'
           },
           {
             numero: '2',
-            titulo: 'Faça a Simulação',
-            descricao: 'Veja quanto vai pagar por mês e o prazo do consórcio'
+            titulo: 'Adesão',
+            descricao: 'Assine o contrato e entre no grupo do consórcio'
           },
           {
             numero: '3',
-            titulo: 'Seja Contemplado',
-            descricao: 'Por sorteio mensal ou lance, você recebe sua carta'
+            titulo: 'Pagamento',
+            descricao: 'Pague as parcelas mensais fixas sem juros'
           },
           {
             numero: '4',
-            titulo: 'Compre seu Imóvel',
-            descricao: 'Use a carta para comprar o imóvel dos seus sonhos'
+            titulo: 'Contemplação',
+            descricao: 'Seja contemplado por sorteio ou lance'
+          },
+          {
+            numero: '5',
+            titulo: 'Casa Própria',
+            descricao: 'Escolha e compre seu imóvel com o crédito liberado'
           }
         ]
       },
-      simulador: {
-        titulo: 'Simule seu Consórcio',
-        subtitulo: 'Veja quanto você vai pagar por mês',
-        valores: [
-          { valor: '150000', parcela: '380', prazo: '120' },
-          { valor: '200000', parcela: '510', prazo: '120' },
-          { valor: '300000', parcela: '760', prazo: '120' },
-          { valor: '500000', parcela: '1270', prazo: '120' }
+      depoimentos: {
+        titulo: 'Depoimentos de Clientes',
+        lista: [
+          {
+            nome: 'Maria Rita',
+            contemplado: 'Contemplada em 2023',
+            iniciais: 'MR',
+            depoimento: 'Consegui minha casa própria em comprometer o orçamento familiar. O atendimento foi excepcional!',
+            estrelas: 5
+          },
+          {
+            nome: 'João Silva',
+            contemplado: 'Contemplado em 2023',
+            iniciais: 'JS',
+            depoimento: 'Processo transparente e sem surpresas. Recomendo para quem quer sair do aluguel!',
+            estrelas: 5
+          },
+          {
+            nome: 'Ana Fernandes',
+            contemplado: 'Contemplada em 2024',
+            iniciais: 'AF',
+            depoimento: 'Equipe muito atenciosa e sempre disposta a esclarecer todas as dúvidas. Obrigada!',
+            estrelas: 5
+          }
         ]
       },
-      contato: {
-        titulo: 'Entre em Contato',
-        subtitulo: 'Fale com nossos especialistas',
-        telefone: '(11) 9 9999-9999',
-        whatsapp: '5511999999999',
-        email: 'contato@bancojota.com.br',
-        endereco: 'Av. Paulista, 1000 - São Paulo/SP'
+      formularioSimulacao: {
+        titulo: 'Simule Seu Consórcio',
+        subtitulo: 'Preencha o formulário e receba uma proposta personalizada',
+        faleConosco: {
+          titulo: 'Fale Conosco',
+          email: 'contato@bancojota.com.br',
+          telefone: '(11) 9999-9999',
+          endereco: 'São Paulo - SP',
+          horario: {
+            titulo: 'Horário de Atendimento',
+            segunda: 'Segunda à Sexta às 19h',
+            sabado: 'Sábado às 12h',
+            domingo: 'Domingo: Fechado'
+          }
+        },
+        formulario: {
+          campos: [
+            { nome: 'nomeCompleto', placeholder: 'Seu nome completo', tipo: 'text' },
+            { nome: 'email', placeholder: 'Seu melhor e-mail', tipo: 'email' },
+            { nome: 'whatsapp', placeholder: 'Seu telefone com WhatsApp', tipo: 'tel' },
+            { nome: 'objetivo', placeholder: 'Conte-nos sobre seu objetivo (opcional)', tipo: 'textarea' }
+          ],
+          checkbox: 'Aceito receber contato via WhatsApp e estou ciente da Política de Privacidade e Termos de Uso.',
+          botao: 'Falar com Consultor no WhatsApp'
+        }
+      },
+      faq: {
+        titulo: 'Perguntas Frequentes',
+        subtitulo: 'Tire suas dúvidas sobre consórcio imobiliário',
+        perguntas: [
+          {
+            pergunta: 'O que é consórcio imobiliário?',
+            resposta: 'O consórcio imobiliário é um sistema de poupança programada onde um grupo de pessoas se reúne para adquirir bens imobiliários. Mensalmente, uma ou mais pessoas são contempladas e recebem o crédito para comprar seu imóvel.'
+          },
+          {
+            pergunta: 'Preciso dar entrada?',
+            resposta: 'Não é obrigatório dar entrada para participar do consórcio. Você pode optar por dar uma entrada para reduzir o valor das parcelas mensais, mas não é uma exigência.'
+          },
+          {
+            pergunta: 'Como funciona a contemplação?',
+            resposta: 'A contemplação acontece mensalmente através de sorteio ou lance. No sorteio, é por pura sorte. No lance, você oferece um valor adicional para ser contemplado mais rapidamente.'
+          },
+          {
+            pergunta: 'Qual a diferença para o financiamento?',
+            resposta: 'No consórcio você não paga juros, apenas uma taxa de administração. No financiamento, você paga juros que podem encarecer significativamente o valor final do imóvel.'
+          },
+          {
+            pergunta: 'Posso usar o FGTS?',
+            resposta: 'Sim! Você pode usar o FGTS para dar lances, quitar parcelas em atraso ou até mesmo como entrada na compra do imóvel após ser contemplado.'
+          },
+          {
+            pergunta: 'E se eu quiser sair do consórcio?',
+            resposta: 'Você pode sair do consórcio a qualquer momento. Os valores pagos são devolvidos ao final do grupo, corrigidos pelos índices contratuais, descontadas as taxas de administração.'
+          }
+        ]
+      },
+      footer: {
+        logo: '/logo.png',
+        descricao: 'Especialistas em consórcio imobiliário com atendimento humanizado e consultivo.',
+        linksRapidos: {
+          titulo: 'Links Rápidos',
+          links: [
+            { texto: 'Sobre', url: '#sobre' },
+            { texto: 'Benefícios', url: '#beneficios' },
+            { texto: 'Como Funciona', url: '#como-funciona' },
+            { texto: 'Contato', url: '#contato' }
+          ]
+        },
+        legal: {
+          titulo: 'Legal',
+          links: [
+            { texto: 'Política de Privacidade', url: '/privacidade' },
+            { texto: 'Termos de Uso', url: '/termos' },
+            { texto: 'LGPD', url: '/lgpd' }
+          ]
+        },
+        contato: {
+          titulo: 'Contato',
+          telefone: '(11) 9999-9999',
+          email: 'contato@bancojota.com.br',
+          endereco: 'São Paulo - SP'
+        },
+        copyright: '© 2024 Banco Jota. Todos os direitos reservados.'
       },
       seo: {
         titulo: 'Banco Jota - Consórcio Imobiliário Sem Juros',
@@ -118,7 +251,6 @@ export const useBancoJota = () => {
     const result = await executeApi(() => apiService.getBancoJotaContent());
     if (result.success && result.data) {
       console.log('Dados recebidos da API:', result.data);
-      // Se a API retornar dados, usar eles, senão manter os dados padrão
       if (result.data.data && typeof result.data.data === 'object') {
         setBancoJotaData(result.data);
       }
