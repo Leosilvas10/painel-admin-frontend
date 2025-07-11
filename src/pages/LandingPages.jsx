@@ -56,6 +56,8 @@ const LandingPages = () => {
     }
   ];
 
+  const [deletedPages, setDeletedPages] = useState(new Set());
+
   // Combine API data with mock data, filtering out deleted pages
   const allPages = [...mockPages, ...landingPages].filter(page => !deletedPages.has(page.id));
 
@@ -63,8 +65,6 @@ const LandingPages = () => {
     page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     page.slug.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const [deletedPages, setDeletedPages] = useState(new Set());
 
   const handleDeletePage = async (page) => {
     try {
@@ -101,6 +101,17 @@ const LandingPages = () => {
       <div className="space-y-6">
         <div className="flex items-center justify-center h-64">
           <div className="text-white">Carregando landing pages...</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-red-400">Erro ao carregar landing pages: {error}</div>
         </div>
       </div>
     );

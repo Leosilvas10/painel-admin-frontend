@@ -30,12 +30,14 @@ export const useLandingPages = () => {
         setLandingPages(result.data);
       } else {
         // Fallback para array vazio se a API falhar
+        console.log('API não retornou dados válidos, usando array vazio');
         setLandingPages([]);
       }
       return result;
     } catch (err) {
       console.error('Erro ao carregar landing pages:', err);
       setLandingPages([]);
+      setError(err.message || 'Erro desconhecido ao carregar landing pages');
       return { success: false, error: err.message };
     }
   };
