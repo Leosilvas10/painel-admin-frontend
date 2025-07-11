@@ -65,15 +65,15 @@ const LandingPages = () => {
   );
 
   const handleDeletePage = async (page) => {
-    // Verificar se é um ID de mock (números 1, 2, 3)
-    if (['1', '2', '3', 1, 2, 3].includes(page.id)) {
-      alert('Esta é uma página de demonstração e não pode ser deletada');
-      setDeleteConfirm(null);
-      return;
-    }
-
     try {
-      // Para páginas do backend, usar o slug; para mock, usar o ID
+      // Para páginas do backend, usar o slug; para páginas mock, simular deleção
+      if (['1', '2', '3', 1, 2, 3].includes(page.id)) {
+        // Simular deleção das páginas de demonstração
+        alert('Página de demonstração deletada (simulação)!');
+        setDeleteConfirm(null);
+        return;
+      }
+
       const identifier = page.slug || page.id;
       const result = await deleteLandingPage(identifier);
       if (result.success) {
