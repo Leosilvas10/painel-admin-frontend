@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import apiService from '../services/api';
 
 export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -8,13 +9,24 @@ export const useAuth = () => {
 
   useEffect(() => {
     // Verificar se o usuário está autenticado ao carregar a aplicação
-    const checkAuth = () => {
-      const authStatus = localStorage.getItem('isAuthenticated');
-      const userData = localStorage.getItem('user');
+    const checkAuth = async () => {
+      const token = localStorage.getItem('authToken');
       
-      if (authStatus === 'true' && userData) {
-        setIsAuthenticated(true);
-        setUser(JSON.parse(userData));
+      if (token) {
+        try {
+          const userData = await apiService.getMe();
+          setIsAuthenticated(true);
+          setUser(userData);
+          localStorage.setItem('user', JSON.stringify(userData));
+          localStorage.setItem('isAuthenticated', 'true');
+        } catch (error) {
+          // Token inválido ou expirado
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('isAuthenticated');
+          localStorage.removeItem('user');
+          setIsAuthenticated(false);
+          setUser(null);
+        }
       }
       setIsLoading(false);
     };
@@ -22,21 +34,39 @@ export const useAuth = () => {
     checkAuth();
   }, []);
 
-  const login = (status) => {
-    setIsAuthenticated(status);
-    if (status) {
-      const userData = localStorage.getItem('user');
-      if (userData) {
-        setUser(JSON.parse(userData));
-      }
+  const login = async (credentials) => {
+    try {
+      const response = await apiService.login(credentials);
+      const { token, user: userData } = response;
+      
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('isAuthenticated', 'true');
+      
+      setIsAuthenticated(true);
+      setUser(userData);
+      
+      return { success: true };
+    } catch (error) {
+      return { 
+        success: false, 
+        message: error.response?.data?.message || 'Erro ao fazer login'
+      };
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('user');
-    setIsAuthenticated(false);
-    setUser(null);
+  const logout = async () => {
+    try {
+      await apiService.logout();
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+    } finally {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('isAuthenticated');
+      localStorage.removeItem('user');
+      setIsAuthenticated(false);
+      setUser(null);
+    }
   };
 
   return {

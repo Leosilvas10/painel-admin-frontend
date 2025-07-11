@@ -1,7 +1,10 @@
 import React from 'react';
-import { Search, MessageSquare, Bell, Menu } from 'lucide-react';
+import { Menu, Bell, Search, User } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
 
 const Header = ({ setSidebarOpen }) => {
+  const { logout } = useAuth();
+
   return (
     <header className="bg-gray-800 border-b border-gray-700">
       <div className="flex items-center justify-between h-16 px-4">
@@ -50,6 +53,14 @@ const Header = ({ setSidebarOpen }) => {
           <button className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
             <Bell className="h-5 w-5" />
           </button>
+
+           {/* Logout */}
+           <button
+              className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              onClick={logout}
+            >
+              <User className="h-5 w-5" />
+            </button>
         </div>
       </div>
     </header>

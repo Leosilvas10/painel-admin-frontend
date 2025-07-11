@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Lock, User, Eye, EyeOff } from 'lucide-react';
 
@@ -13,20 +12,20 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     setError('');
+    setIsLoading(true);
 
-    // Simular delay de autenticação
-    setTimeout(() => {
-      if (formData.username === 'admin' && formData.password === 'admin123') {
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('user', JSON.stringify({ username: 'admin', role: 'administrator' }));
-        onLogin(true);
-      } else {
-        setError('Usuário ou senha incorretos');
+    try {
+      const result = await onLogin(formData);
+
+      if (!result.success) {
+        setError(result.message || 'Usuário ou senha incorretos');
       }
+    } catch (error) {
+      setError('Erro interno do servidor. Tente novamente.');
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (e) => {
@@ -52,7 +51,7 @@ const Login = ({ onLogin }) => {
             Faça login para acessar o <span className="text-purple-400 font-semibold">JotaGuard</span>
           </p>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
@@ -75,7 +74,7 @@ const Login = ({ onLogin }) => {
                 />
               </div>
             </div>
-            
+
             <div>
               <label htmlFor="password" className="sr-only">
                 Senha
