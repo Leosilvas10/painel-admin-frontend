@@ -37,25 +37,43 @@ export const useAuth = () => {
     setIsLoading(true);
 
     try {
+      console.log('🔄 Tentando fazer login com:', { username: credentials.username });
       const response = await apiService.login(credentials);
+      console.log('📥 Resposta do login:', response);
 
-      if (response.success) {
-        localStorage.setItem('authToken', response.token);
+      if (response.success || response.token) {
+        const token = response.token;
+        const user = response.user;
+        
+        localStorage.setItem('authToken', token);
         localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('user', JSON.stringify(response.user));
+        localStorage.setItem('user', JSON.stringify(user));
 
         setIsAuthenticated(true);
-        setUser(response.user);
+        setUser(user);
 
+        console.log('✅ Login realizado com sucesso');
         return { success: true };
       } else {
-        return { success: false, message: response.message };
+        console.log('❌ Login falhou:', response.message);
+        return { success: false, message: response.message || 'Credenciais inválidas' };
       }
     } catch (error) {
       console.error('Login error:', error);
+      
+      let errorMessage = 'Erro de conexão. Verifique se o backend está rodando.';
+      
+      if (error.code === 'ERR_NETWORK') {
+        errorMessage = 'Não foi possível conectar com o servidor. Verifique se o backend está rodando na porta 5000.';
+      } else if (error.response?.status === 401) {
+        errorMessage = 'Usuário ou senha incorretos.';
+      } else if (error.response?.status === 500) {
+        errorMessage = 'Erro interno do servidor.';
+      }
+      
       return { 
         success: false, 
-        message: 'Erro de conexão. Verifique se o backend está rodando.' 
+        message: errorMessage 
       };
     } finally {
       setIsLoading(false);
