@@ -40,6 +40,29 @@ export const API_ENDPOINTS = {
   IMAGES_UPLOAD: '/api/images/upload',
   IMAGES_LIST: '/api/images',
   IMAGES_DELETE: (id) => `/api/images/${id}`,
+  
+  // Forms
+  FORMS_LIST: '/api/forms',
+  FORMS_CREATE: '/api/forms',
+  FORMS_GET: (id) => `/api/forms/${id}`,
+  FORMS_UPDATE: (id) => `/api/forms/${id}`,
+  FORMS_DELETE: (id) => `/api/forms/${id}`,
+  FORMS_SUBMIT: (id) => `/api/forms/${id}/submit',
+  FORMS_SUBMISSIONS: (id) => `/api/forms/${id}/submissions`,
+  
+  // Users
+  USERS_LIST: '/api/users',
+  USERS_CREATE: '/api/users',
+  USERS_GET: (id) => `/api/users/${id}`,
+  USERS_UPDATE: (id) => `/api/users/${id}`,
+  USERS_DELETE: (id) => `/api/users/${id}`,
+  USERS_STATUS: (id) => `/api/users/${id}/status`,
+  
+  // Dashboard
+  DASHBOARD_STATS: '/api/dashboard/stats',
+  DASHBOARD_ACTIVITIES: '/api/dashboard/activities',
+  DASHBOARD_CHARTS: '/api/dashboard/charts',
+  DASHBOARD_SYSTEM: '/api/dashboard/system',
 };
 
 export default API_BASE_URL;

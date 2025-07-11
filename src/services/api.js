@@ -151,6 +151,94 @@ class ApiService {
     const response = await httpService.delete(API_ENDPOINTS.IMAGES_DELETE(id));
     return response.data;
   }
+
+  // FORMS
+  async getForms() {
+    const response = await httpService.get(API_ENDPOINTS.FORMS_LIST);
+    return response.data;
+  }
+
+  async createForm(data) {
+    const response = await httpService.post(API_ENDPOINTS.FORMS_CREATE, data);
+    return response.data;
+  }
+
+  async getForm(id) {
+    const response = await httpService.get(API_ENDPOINTS.FORMS_GET(id));
+    return response.data;
+  }
+
+  async updateForm(id, data) {
+    const response = await httpService.put(API_ENDPOINTS.FORMS_UPDATE(id), data);
+    return response.data;
+  }
+
+  async deleteForm(id) {
+    const response = await httpService.delete(API_ENDPOINTS.FORMS_DELETE(id));
+    return response.data;
+  }
+
+  async submitForm(id, data) {
+    const response = await httpService.post(API_ENDPOINTS.FORMS_SUBMIT(id), data);
+    return response.data;
+  }
+
+  async getFormSubmissions(id) {
+    const response = await httpService.get(API_ENDPOINTS.FORMS_SUBMISSIONS(id));
+    return response.data;
+  }
+
+  // USERS
+  async getUsers() {
+    const response = await httpService.get(API_ENDPOINTS.USERS_LIST);
+    return response.data;
+  }
+
+  async createUser(data) {
+    const response = await httpService.post(API_ENDPOINTS.USERS_CREATE, data);
+    return response.data;
+  }
+
+  async getUser(id) {
+    const response = await httpService.get(API_ENDPOINTS.USERS_GET(id));
+    return response.data;
+  }
+
+  async updateUser(id, data) {
+    const response = await httpService.put(API_ENDPOINTS.USERS_UPDATE(id), data);
+    return response.data;
+  }
+
+  async deleteUser(id) {
+    const response = await httpService.delete(API_ENDPOINTS.USERS_DELETE(id));
+    return response.data;
+  }
+
+  async updateUserStatus(id, status) {
+    const response = await httpService.patch(API_ENDPOINTS.USERS_STATUS(id), { status });
+    return response.data;
+  }
+
+  // DASHBOARD
+  async getDashboardStats() {
+    const response = await httpService.get(API_ENDPOINTS.DASHBOARD_STATS);
+    return response.data;
+  }
+
+  async getDashboardActivities() {
+    const response = await httpService.get(API_ENDPOINTS.DASHBOARD_ACTIVITIES);
+    return response.data;
+  }
+
+  async getDashboardCharts() {
+    const response = await httpService.get(API_ENDPOINTS.DASHBOARD_CHARTS);
+    return response.data;
+  }
+
+  async getDashboardSystem() {
+    const response = await httpService.get(API_ENDPOINTS.DASHBOARD_SYSTEM);
+    return response.data;
+  }
 }
 
 export default new ApiService();
