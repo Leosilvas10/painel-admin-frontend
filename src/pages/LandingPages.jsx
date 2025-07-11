@@ -64,22 +64,18 @@ const LandingPages = () => {
     page.slug.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleDeletePage = async (pageId) => {
-    if (pageId === 'banco-jota') {
-      alert('Não é possível deletar a página do Banco Jota');
-      setDeleteConfirm(null);
-      return;
-    }
-
+  const handleDeletePage = async (page) => {
     // Verificar se é um ID de mock (números 1, 2, 3)
-    if (['1', '2', '3', 1, 2, 3].includes(pageId)) {
+    if (['1', '2', '3', 1, 2, 3].includes(page.id)) {
       alert('Esta é uma página de demonstração e não pode ser deletada');
       setDeleteConfirm(null);
       return;
     }
 
     try {
-      const result = await deleteLandingPage(pageId);
+      // Para páginas do backend, usar o slug; para mock, usar o ID
+      const identifier = page.slug || page.id;
+      const result = await deleteLandingPage(identifier);
       if (result.success) {
         alert(result.message || 'Landing page deletada com sucesso!');
       } else {
@@ -300,7 +296,7 @@ const LandingPages = () => {
                 Cancelar
               </button>
               <button
-                onClick={() => handleDeletePage(deleteConfirm.id)}
+                onClick={() => handleDeletePage(deleteConfirm)}
                 className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200"
               >
                 Deletar

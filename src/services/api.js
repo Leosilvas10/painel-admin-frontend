@@ -240,8 +240,8 @@ class ApiService {
     return response.data;
   }
 
-  async deleteLandingPage(id) {
-    const response = await httpService.delete(API_ENDPOINTS.LANDING_PAGES_DELETE(id));
+  async deleteLandingPage(slug) {
+    const response = await httpService.delete(API_ENDPOINTS.LANDING_PAGES_DELETE(slug));
     return response.data;
   }
 

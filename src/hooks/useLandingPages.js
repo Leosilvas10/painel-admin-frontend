@@ -60,9 +60,11 @@ export const useLandingPages = () => {
 
   const deleteLandingPage = async (id) => {
     try {
-      const result = await executeApi(() => apiService.deleteLandingPage(id));
+      // Para landing pages do backend, usar o slug como identificador
+      const slug = typeof id === 'string' ? id : `landing-${id}`;
+      const result = await executeApi(() => apiService.deleteLandingPage(slug));
       if (result.success) {
-        setLandingPages(landingPages.filter(page => page.id !== id));
+        setLandingPages(landingPages.filter(page => page.id !== id && page.slug !== slug));
         return { success: true, message: 'Landing page deletada com sucesso!' };
       } else {
         console.error('Erro ao deletar landing page:', result.error);
