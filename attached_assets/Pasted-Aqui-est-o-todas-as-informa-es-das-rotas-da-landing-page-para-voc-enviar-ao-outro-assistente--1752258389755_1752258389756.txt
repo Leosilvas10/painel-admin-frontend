@@ -1,0 +1,98 @@
+Aqui estão todas as informações das rotas da landing page para você enviar ao outro assistente:
+
+📋 ROTAS COMPLETAS DA LANDING PAGE
+BASE URL:
+https://painel-admin-backend-leonardosilvas2.replit.app/api
+1. 🔍 LISTAR TODAS AS LANDING PAGES
+Método: GET
+Rota: /api/content/landing
+Descrição: Lista todas as landing pages disponíveis
+Resposta de Sucesso:
+{
+  "message": "Landing pages listadas com sucesso",
+  "count": 1,
+  "landings": [
+    {
+      "slug": "banco-jota",
+      "title": "Título da Landing do Banco Jota",
+      "updatedAt": "2025-07-11T17:58:09.140Z"
+    }
+  ]
+}
+2. 📖 BUSCAR UMA LANDING PAGE ESPECÍFICA
+Método: GET
+Rota: /api/content/landing/:slug
+Exemplo: /api/content/landing/banco-jota
+Descrição: Busca dados de uma landing page específica
+Resposta de Sucesso:
+{
+  "slug": "banco-jota",
+  "data": {
+    "title": "Título da Landing do Banco Jota",
+    "subtitle": "Subtítulo...",
+    "cta": "Chamada para ação",
+    "description": "Descrição detalhada...",
+    "createdAt": "2025-07-11T17:58:09.140Z",
+    "updatedAt": "2025-07-11T17:58:09.140Z"
+  },
+  "message": "Landing page encontrada com sucesso"
+}
+3. ✏️ ATUALIZAR/CRIAR LANDING PAGE
+Método: PUT
+Rota: /api/content/landing/:slug
+Exemplo: /api/content/landing/banco-jota
+Descrição: Cria ou atualiza uma landing page
+Body da Requisição:
+{
+  "title": "Novo título",
+  "subtitle": "Novo subtítulo",
+  "cta": "Nova chamada para ação",
+  "description": "Nova descrição"
+}
+Resposta de Sucesso:
+{
+  "message": "Landing page atualizada com sucesso",
+  "slug": "banco-jota",
+  "data": {
+    "title": "Novo título",
+    "subtitle": "Novo subtítulo",
+    "cta": "Nova chamada para ação",
+    "description": "Nova descrição",
+    "updatedAt": "2025-07-11T18:21:42.749Z",
+    "createdAt": "2025-07-11T17:58:09.140Z"
+  }
+}
+4. 🗑️ DELETAR LANDING PAGE
+Método: DELETE
+Rota: /api/content/landing/:slug
+Exemplo: /api/content/landing/banco-jota
+Descrição: Deleta uma landing page específica
+Resposta de Sucesso:
+{
+  "message": "Landing page deletada com sucesso",
+  "slug": "banco-jota",
+  "deletedAt": "2025-07-11T18:21:42.749Z"
+}
+Resposta de Erro (404):
+{
+  "error": "Landing page não encontrada",
+  "slug": "banco-jota"
+}
+💡 INFORMAÇÕES IMPORTANTES:
+Slug: É o identificador único da landing page (ex: "banco-jota")
+Campos disponíveis: title, subtitle, cta, description
+Timestamps: createdAt e updatedAt são gerados automaticamente
+CORS: Configurado para aceitar requisições do frontend
+Métodos aceitos: GET, POST, PUT, DELETE, OPTIONS
+🧪 EXEMPLOS DE TESTE COM CURL:
+# Listar todas
+curl https://painel-admin-backend-leonardosilvas2.replit.app/api/content/landing
+# Buscar específica
+curl https://painel-admin-backend-leonardosilvas2.replit.app/api/content/landing/banco-jota
+# Atualizar/Criar
+curl -X PUT https://painel-admin-backend-leonardosilvas2.replit.app/api/content/landing/banco-jota \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Novo título","subtitle":"Novo subtítulo"}'
+# Deletar
+curl -X DELETE https://painel-admin-backend-leonardosilvas2.replit.app/api/content/landing/banco-jota
+✅ TODAS AS ROTAS ESTÃO FUNCIONANDO E TESTADAS!
