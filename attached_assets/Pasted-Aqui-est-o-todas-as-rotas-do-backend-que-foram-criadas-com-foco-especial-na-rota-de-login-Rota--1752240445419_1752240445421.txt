@@ -1,0 +1,76 @@
+Aqui estão todas as rotas do backend que foram criadas, com foco especial na rota de login:
+
+Rota de Autenticação (Login)
+Base URL: http://localhost:5000/api/auth
+
+POST /api/auth/login
+{
+  "username": "admin@admin.com",
+  "password": "admin123"
+}
+Resposta de sucesso:
+
+{
+  "message": "Login realizado com sucesso",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "1",
+    "username": "admin@admin.com",
+    "role": "admin",
+    "email": "admin@admin.com"
+  }
+}
+GET /api/auth/verify
+Verifica se o token JWT é válido (usar o token no header Authorization: Bearer TOKEN)
+
+Todas as Rotas Disponíveis
+Base URL: http://localhost:5000/api
+
+Autenticação
+POST /auth/login - Login do usuário
+GET /auth/verify - Verificar token
+Usuários (requer autenticação)
+GET /users - Listar usuários
+POST /users - Criar usuário
+GET /users/:id - Obter usuário específico
+PUT /users/:id - Atualizar usuário
+DELETE /users/:id - Deletar usuário
+Conteúdo (requer autenticação)
+GET /content - Listar conteúdos
+POST /content - Criar conteúdo
+GET /content/:id - Obter conteúdo específico
+PUT /content/:id - Atualizar conteúdo
+DELETE /content/:id - Deletar conteúdo
+Blocos (requer autenticação)
+GET /blocks - Listar blocos
+POST /blocks - Criar bloco
+GET /blocks/:id - Obter bloco específico
+PUT /blocks/:id - Atualizar bloco
+DELETE /blocks/:id - Deletar bloco
+Formulários (requer autenticação)
+GET /forms - Listar formulários
+POST /forms - Criar formulário
+GET /forms/:id - Obter formulário específico
+PUT /forms/:id - Atualizar formulário
+DELETE /forms/:id - Deletar formulário
+Imagens (requer autenticação)
+GET /images - Listar imagens
+POST /images/upload - Upload de imagem
+DELETE /images/:id - Deletar imagem
+Vídeos (requer autenticação)
+GET /videos - Listar vídeos
+POST /videos/upload - Upload de vídeo
+DELETE /videos/:id - Deletar vídeo
+Logo (requer autenticação para modificações)
+GET /logo - Obter logo atual (público)
+POST /logo/upload - Upload de logo
+DELETE /logo/:id - Deletar logo
+Configurações (requer autenticação)
+GET /settings - Obter configurações
+PUT /settings - Atualizar configurações
+Dashboard (requer autenticação)
+GET /dashboard/stats - Estatísticas do dashboard
+Credenciais Padrão do Admin
+Email: admin@admin.com
+Senha: admin123
+O servidor está rodando na porta 5000 e todas as rotas estão funcionando corretamente. Use essas informações para configurar o frontend e fazer as chamadas para a API.
