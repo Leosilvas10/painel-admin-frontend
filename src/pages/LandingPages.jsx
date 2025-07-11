@@ -195,7 +195,7 @@ const LandingPages = () => {
                   <button className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors duration-200">
                     <MoreVertical className="h-4 w-4" />
                   </button>
-                </div></div>
+                </div>
               </div>
             </div>
           </div>
