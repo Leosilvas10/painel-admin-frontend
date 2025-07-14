@@ -7,95 +7,24 @@ const LandingPages = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState(null);
 
-  // Show error state if there's an error
-  if (error && !loading) {
-    console.error('Landing Pages Error:', error);
-  }
-
-  // Mock data to merge with API data
-  const mockPages = [
-    {
-      id: 1,
-      title: 'Produto Revolucionário',
-      slug: 'produto-revolucionario',
-      status: 'published',
-      views: 1250,
-      leads: 45,
-      lastModified: '2024-01-15',
-      thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-    },
-    {
-      id: 2,
-      title: 'Curso Premium Marketing',
-      slug: 'curso-marketing',
-      status: 'draft',
-      views: 850,
-      leads: 32,
-      lastModified: '2024-01-14',
-      thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-    },
-    {
-      id: 3,
-      title: 'Consultoria Especializada',
-      slug: 'consultoria',
-      status: 'published',
-      views: 2100,
-      leads: 78,
-      lastModified: '2024-01-13',
-      thumbnail: 'https://images.unsplash.com/photo-1553028826-f4804a6dba3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-    },
-    {
-      id: 'banco-jota',
-      title: 'Banco Jota',
-      slug: 'banco-jota',
-      status: 'published',
-      views: 890,
-      leads: 25,
-      lastModified: '2024-01-16',
-      thumbnail: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-    }
-  ];
-
-  const [deletedPages, setDeletedPages] = useState(new Set());
-
-  // Combine API data with mock data, filtering out deleted pages
-  const allPages = [...mockPages, ...landingPages].filter(page => !deletedPages.has(page.id));
-
-  const filteredPages = allPages.filter(page =>
-    page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    page.slug.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filtro para busca
+  const filteredPages = landingPages.filter(page =>
+    page.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    page.slug?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleDeletePage = async (page) => {
-    try {
-      // Para páginas mock, simular deleção removendo da lista
-      if (['1', '2', '3', 1, 2, 3].includes(page.id)) {
-        setDeletedPages(prev => new Set([...prev, page.id]));
-        alert('Página de demonstração deletada com sucesso!');
-        setDeleteConfirm(null);
-        return;
-      }
-
-      const identifier = page.slug || page.id;
-      const result = await deleteLandingPage(identifier);
-      if (result.success) {
-        alert(result.message || 'Landing page deletada com sucesso!');
-      } else {
-        alert('Erro ao deletar landing page: ' + (result.error || 'Erro desconhecido'));
-      }
-    } catch (err) {
-      console.error('Erro ao deletar:', err);
-      alert('Erro inesperado ao deletar landing page');
+    const identifier = page.slug || page.id;
+    const result = await deleteLandingPage(identifier);
+    if (result.success) {
+      alert(result.message || 'Landing page deletada com sucesso!');
+    } else {
+      alert('Erro ao deletar landing page: ' + (result.error || 'Erro desconhecido'));
     }
-    
     setDeleteConfirm(null);
   };
 
-  const confirmDelete = (page) => {
-    setDeleteConfirm(page);
-  };
-
-  // Show loading state
+  // Loading state
   if (loading && landingPages.length === 0) {
     return (
       <div className="space-y-6">
@@ -106,7 +35,7 @@ const LandingPages = () => {
     );
   }
 
-  // Show error state
+  // Error state
   if (error) {
     return (
       <div className="space-y-6">
@@ -162,13 +91,15 @@ const LandingPages = () => {
       {/* Pages Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredPages.map((page) => (
-          <div key={page.id} className="bg-gray-800 rounded-lg overflow-hidden card-hover">
+          <div key={page.id || page.slug} className="bg-gray-800 rounded-lg overflow-hidden card-hover">
             <div className="relative">
-              <img
-                src={page.thumbnail}
-                alt={page.title}
-                className="w-full h-48 object-cover"
-              />
+              {page.thumbnail && (
+                <img
+                  src={page.thumbnail}
+                  alt={page.title}
+                  className="w-full h-48 object-cover"
+                />
+              )}
               <div className="absolute top-4 right-4">
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                   page.status === 'published' 
@@ -186,17 +117,17 @@ const LandingPages = () => {
 
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-white">{page.views}</div>
+                  <div className="text-2xl font-bold text-white">{page.views ?? 0}</div>
                   <div className="text-xs text-gray-400">Visualizações</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-400">{page.leads}</div>
+                  <div className="text-2xl font-bold text-purple-400">{page.leads ?? 0}</div>
                   <div className="text-xs text-gray-400">Leads</div>
                 </div>
               </div>
 
               <div className="text-xs text-gray-400 mb-4">
-                Modificado em {new Date(page.lastModified).toLocaleDateString('pt-BR')}
+                Modificado em {page.updatedAt ? new Date(page.updatedAt).toLocaleDateString('pt-BR') : '--'}
               </div>
 
               <div className="flex items-center justify-between">
@@ -206,11 +137,7 @@ const LandingPages = () => {
                   </button>
                   <button 
                     onClick={() => {
-                      if (page.id === 'banco-jota') {
-                        window.open('/banco-jota-editor', '_blank');
-                      } else {
-                        window.open(`/editor/${page.id}`, '_blank');
-                      }
+                      window.open(`/editor/${page.slug || page.id}`);
                     }}
                     className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors duration-200"
                     title="Editar Landing Page"
@@ -225,7 +152,7 @@ const LandingPages = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <button 
-                    onClick={() => confirmDelete(page)}
+                    onClick={() => setDeleteConfirm(page)}
                     className="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded-lg transition-colors duration-200"
                     title="Deletar Landing Page"
                   >
@@ -239,57 +166,6 @@ const LandingPages = () => {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-2xl font-bold text-white">12</div>
-              <div className="text-gray-400 text-sm">Total de Páginas</div>
-            </div>
-            <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-              <Globe className="h-6 w-6 text-purple-400" />
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-2xl font-bold text-white">4,200</div>
-              <div className="text-gray-400 text-sm">Total de Leads</div>
-            </div>
-            <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-              <span className="text-green-400 text-xl">👥</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-2xl font-bold text-white">18.5%</div>
-              <div className="text-gray-400 text-sm">Taxa de Conversão</div>
-            </div>
-            <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-              <span className="text-blue-400 text-xl">📈</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-2xl font-bold text-white">8</div>
-              <div className="text-gray-400 text-sm">Páginas Ativas</div>
-            </div>
-            <div className="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center">
-              <span className="text-orange-400 text-xl">🚀</span>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Delete Confirmation Modal */}
